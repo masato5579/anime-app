@@ -40,7 +40,7 @@ cp .env.example .env
 
 3. .env.testingの作成
 ```
-cp .env.example .env.testing
+cp .env .env.testing
 ```
 4. .env.testingの値を変更する
 ```
