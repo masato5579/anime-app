@@ -1,25 +1,34 @@
 import Head from 'next/head'
-import {apiClient, apiServer} from "../utills/axios";
-import {TestItem, TestItemResponse} from "../types/TestItem";
+import {apiServer} from "../utills/axios";
+import {User, UserResponse} from "../types/User";
 import { NextPage } from 'next';
 
 interface Props {
-  data: TestItem
+  data: User
 }
 
 export async function getServerSideProps() {
-  let data: TestItem = {
+  let data: User = {
     id: 0,
     name: '',
+    email: '',
+    image: '',
+    age: 0,
+    sex: 0,
+    email_verified_at: '',
     updated_at: '',
     created_at: ''
   }
-  console.log(data)
-  await apiServer.get<TestItemResponse>('test')
+  await apiServer.get<UserResponse>('test')
       .then((res) => {
         data = {
           id: res.data.id,
           name: res.data.name,
+          email: res.data.email,
+          image: res.data.image,
+          age: res.data.age,
+          sex: res.data.sex,
+          email_verified_at: res.data.email_verified_at,
           updated_at: res.data.updated_at,
           created_at: res.data.created_at
         }
