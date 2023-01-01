@@ -13,6 +13,13 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 
     /**
+     * モデルに関連付けるテーブル
+     *
+     * @var string
+     */
+    protected $table = 'm_user';
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
@@ -21,6 +28,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'image',
+        'age',
+        'sex',
     ];
 
     /**
