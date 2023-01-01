@@ -110,6 +110,6 @@ $ docker-compose up -d
 ```
 $ docker exec -it anime-front bash
 
-$ docker exec -it anime-front-next-1 bash
+$ ping anime-server-app-1
 64 bytes from 172.18.0.4: seq=0 ttl=64 time=6.421 ms
 ```
