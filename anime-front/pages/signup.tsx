@@ -3,6 +3,7 @@ import {
   Button,
   Container,
   FormControl,
+  FormErrorMessage,
   FormLabel,
   Heading,
   Input,
@@ -11,10 +12,25 @@ import {
 } from '@chakra-ui/react'
 import { Field, Form, Formik } from 'formik'
 import { useRouter } from 'next/router'
+import { useState } from 'react'
 import { postData } from '../utills/postData'
 
 const SignUp = () => {
   const router = useRouter()
+
+  const [errors, setErrors] = useState({
+    email: [],
+    password: [],
+  })
+
+  /**
+   * エラーがあるかどうかチェック
+   * @param errorsKey
+   * @returns boolean
+   */
+  const isErrors = (errorsKey: any) => {
+    return errorsKey && errorsKey.length !== 0
+  }
 
   /**
    * EmailとPasswordがバリデーションに引っかからないかチェックするAPIを投げる
@@ -28,7 +44,8 @@ const SignUp = () => {
       check: true,
     }
     const route = '/signup/profile'
-    postData(apiPass, newFormData, setSubmitting, router, route)
+    postData(apiPass, newFormData, router, route, setErrors)
+    setSubmitting(false)
   }
 
   return (
@@ -53,7 +70,7 @@ const SignUp = () => {
                   <Box>
                     <Field name='email'>
                       {({ field }: any) => (
-                        <FormControl>
+                        <FormControl isInvalid={isErrors(errors.email)}>
                           <FormLabel>メールアドレス</FormLabel>
                           <Input
                             type='email'
@@ -63,6 +80,9 @@ const SignUp = () => {
                             borderColor='base.500'
                             h={{ base: '35px', md: '55px' }}
                           />
+                          {isErrors(errors.email) ? (
+                            <FormErrorMessage>{errors?.email[0]}</FormErrorMessage>
+                          ) : null}
                         </FormControl>
                       )}
                     </Field>
@@ -70,7 +90,7 @@ const SignUp = () => {
                   <Box mt={{ base: '12px', md: '25px' }}>
                     <Field name='password'>
                       {({ field }: any) => (
-                        <FormControl>
+                        <FormControl isInvalid={isErrors(errors.password)}>
                           <FormLabel>パスワード</FormLabel>
                           <Input
                             type='password'
@@ -80,6 +100,9 @@ const SignUp = () => {
                             borderColor='base.500'
                             h={{ base: '35px', md: '55px' }}
                           />
+                          {isErrors(errors.password) ? (
+                            <FormErrorMessage>{errors?.password[0]}</FormErrorMessage>
+                          ) : null}
                         </FormControl>
                       )}
                     </Field>

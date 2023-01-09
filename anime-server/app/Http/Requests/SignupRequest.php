@@ -36,15 +36,4 @@ class SignupRequest extends FormRequest
 
         ], $emailAndPasswordCheck);
     }
-
-    /**
-     * @return array<string, string>
-     */
-    public function attributes()
-    {
-        return [
-            'email' => 'emailが不正です。',
-            'password' => 'passwordが不正です。'
-        ];
-    }
 }

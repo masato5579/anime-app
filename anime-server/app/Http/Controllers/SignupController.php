@@ -12,6 +12,6 @@ class SignUpController extends Controller
      */
     public function signupCheck(SignupRequest $request)
     {
-        return response()->json('success');
+        return response()->json(['confirmed' => true]);
     }
 }
