@@ -10,8 +10,27 @@ import {
   Text,
 } from '@chakra-ui/react'
 import { Field, Form, Formik } from 'formik'
+import { useRouter } from 'next/router'
+import { postData } from '../utills/postData'
 
 const SignUp = () => {
+  const router = useRouter()
+
+  /**
+   * EmailとPasswordがバリデーションに引っかからないかチェックするAPIを投げる
+   * @param formData
+   * @param setSubmitting
+   */
+  const checkEmailAndPass = (formData: any, setSubmitting: any) => {
+    const apiPass = 'signup-check'
+    const newFormData = {
+      ...formData,
+      check: true,
+    }
+    const route = '/signup/profile'
+    postData(apiPass, newFormData, setSubmitting, router, route)
+  }
+
   return (
     <>
       <Container maxW='600px' pt={{ base: '50px', md: '100px' }}>
@@ -25,8 +44,8 @@ const SignUp = () => {
           <Box mt={{ base: '25px', md: '50px' }}>
             <Formik
               initialValues={{ email: '', password: '' }}
-              onSubmit={() => {
-                console.log('hoge')
+              onSubmit={(formData, { setSubmitting }) => {
+                checkEmailAndPass(formData, setSubmitting)
               }}
             >
               {(props) => (

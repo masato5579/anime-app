@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint --dir src",
     "lint:fix": "yarn lint --fix",
-    "format": "prettier --write --ignore-path .gitignore './**/*.{js,jsx,ts,tsx,json}'"
+    "format": "prettier --write --ignore-path .gitignore './**/*.{js,jsx,ts,tsx,json}'",
+    "lintAndFormat": "npm run lint:fix & npm run format"
   },
   "dependencies": {
     "@chakra-ui/react": "^2.4.6",
