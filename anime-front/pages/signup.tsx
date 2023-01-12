@@ -13,6 +13,7 @@ import {
 import { Field, Form, Formik } from 'formik'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
+import { Errors } from '../types/SignUp'
 import { postData } from '../utills/postData'
 
 const SignUp = () => {
@@ -21,23 +22,26 @@ const SignUp = () => {
   const [errors, setErrors] = useState({
     email: [],
     password: [],
-  })
+  } as Errors)
 
   /**
    * エラーがあるかどうかチェック
-   * @param errorsKey
-   * @returns boolean
+   * @param {string[]} errorsKey
+   * @returns {boolean}
    */
-  const isErrors = (errorsKey: any) => {
-    return errorsKey && errorsKey.length !== 0
+  const isErrors = (errorsKey: string[]): boolean => {
+    return errorsKey
+      ? errorsKey.length !== 0
+      : false
   }
 
   /**
    * EmailとPasswordがバリデーションに引っかからないかチェックするAPIを投げる
-   * @param formData
-   * @param setSubmitting
+   * @param {object} formData
+   * @param {Function} setSubmitting
+   * @return {void}
    */
-  const checkEmailAndPass = (formData: any, setSubmitting: any) => {
+  const checkEmailAndPass = (formData: object, setSubmitting:Function): void => {
     const apiPass = 'signup-check'
     const newFormData = {
       ...formData,
@@ -62,6 +66,7 @@ const SignUp = () => {
             <Formik
               initialValues={{ email: '', password: '' }}
               onSubmit={(formData, { setSubmitting }) => {
+                console.log(typeof setSubmitting)
                 checkEmailAndPass(formData, setSubmitting)
               }}
             >
