@@ -66,7 +66,6 @@ const SignUp = () => {
             <Formik
               initialValues={{ email: '', password: '' }}
               onSubmit={(formData, { setSubmitting }) => {
-                console.log(typeof setSubmitting)
                 checkEmailAndPass(formData, setSubmitting)
               }}
             >
