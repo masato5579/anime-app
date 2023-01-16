@@ -30,9 +30,7 @@ const SignUp = () => {
    * @returns {boolean}
    */
   const isErrors = (errorsKey: string[]): boolean => {
-    return errorsKey
-      ? errorsKey.length !== 0
-      : false
+    return errorsKey ? errorsKey.length !== 0 : false
   }
 
   /**
@@ -41,14 +39,16 @@ const SignUp = () => {
    * @param {Function} setSubmitting
    * @return {void}
    */
-  const checkEmailAndPass = (formData: object, setSubmitting:Function): void => {
+  const checkEmailAndPass = (formData: object, setSubmitting: Function): void => {
     const apiPass = 'signup-check'
     const newFormData = {
       ...formData,
       check: true,
     }
     const route = '/signup/profile'
-    postData(apiPass, newFormData, router, route, setErrors)
+    const nextPage = route
+    const isFile = false
+    postData(apiPass, newFormData, router, route, setErrors, nextPage, isFile)
     setSubmitting(false)
   }
 

@@ -15,3 +15,10 @@ export const apiServer = axios.create({
     'Content-Type': 'application/json',
   },
 })
+
+export const apiClientForfile = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_API_ENDOPOINT,
+  headers: {
+    'Content-Type': 'multipart/form-data',
+  },
+})

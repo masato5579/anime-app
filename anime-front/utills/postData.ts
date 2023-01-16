@@ -1,4 +1,4 @@
-import { apiClient } from './axios'
+import { apiClient, apiClientForfile } from './axios'
 
 export async function postData(
   apiPass: any,
@@ -6,12 +6,25 @@ export async function postData(
   router: any,
   route: any,
   setErrors: any,
+  nextPage: any,
+  isFile: any,
 ) {
-  return await apiClient
+  const api = isFile ? apiClientForfile : apiClient
+
+  return await api
     .post(apiPass, formData)
     .then((res) => {
       if (res.status === 200) {
-        router.push({ pathname: route, query: res.data })
+        router.push(
+          {
+            pathname: route,
+            query: {
+              ...res.data,
+              ...formData,
+            },
+          },
+          nextPage,
+        )
       }
     })
     .catch((e) => {

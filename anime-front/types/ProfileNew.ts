@@ -1,5 +1,5 @@
-export interface Errors{
-    name: string[],
-    age: string[],
-    sex: string[],
+export interface Errors {
+  name: string[]
+  age: string[]
+  sex: string[]
 }
