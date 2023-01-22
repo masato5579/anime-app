@@ -15,7 +15,9 @@ import { Field, Form, Formik } from 'formik'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import SelectFile from '../../components/SelectFile'
-import { Errors } from '../../types/ProfileNew'
+import { fileInfo } from '../../types/components/SelectFile'
+import { Errors } from '../../types/Errors'
+import isErrors from '../../utills/isErrors'
 import { postData } from '../../utills/postData'
 
 const profile = () => {
@@ -31,39 +33,30 @@ const profile = () => {
     name: [],
     age: [],
     sex: [],
+    image: [],
   } as Errors)
 
-  /**
-   * エラーがあるかどうかチェック
-   * @param {string[]} errorsKey
-   * @returns {boolean}
-   */
-  const isErrors = (errorsKey: string[]): boolean => {
-    return errorsKey ? errorsKey.length !== 0 : false
-  }
-
-  const [fileInfo, setFile] = useState({ object: '', base64data: '' })
+  const [fileInfo, setFile] = useState({
+    base64: null,
+    file: null,
+  } as fileInfo)
 
   return (
     <>
       <Container maxW='600px' pt={{ base: '50px', md: '100px' }}>
-        <Heading as='h2' fontSize='2xl' color='brand' m='auto' textAlign='center'>
+        <Heading as='h2' fontSize='2xl' color='brand.500' m='auto' textAlign='center'>
           プロフィール設定
         </Heading>
         <Box maxW='420px' m='auto' mt={{ base: '25px', md: '50px' }}>
           <Formik
             initialValues={{ name: '', age: '', sex: '', image: '' }}
             onSubmit={(formData, { setSubmitting }) => {
-              const apiPass = 'signup'
               const newFormData = {
                 ...formData,
                 email: router.query.email,
                 password: router.query.password,
               }
-              const route = '/'
-              const nextPage = '/'
-              const isFile = true
-              postData(apiPass, newFormData, router, route, setErrors, nextPage, isFile)
+              postData(true, 'signup', newFormData, router, '/', setErrors)
               setSubmitting(false)
             }}
           >

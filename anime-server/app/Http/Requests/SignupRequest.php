@@ -24,7 +24,7 @@ class SignupRequest extends FormRequest
      */
     public function rules()
     {
-        $check = $this->input('check');
+        $check = $this->input('emailAndPassCheck');
 
         $emailAndPasswordCheck = $check
             ? [

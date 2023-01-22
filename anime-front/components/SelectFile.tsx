@@ -1,41 +1,44 @@
-import { Box, Container, FormControl, FormLabel, Image, Input } from '@chakra-ui/react'
+import { Box, FormControl, FormLabel, Image, Input } from '@chakra-ui/react'
 import { Field, useFormikContext } from 'formik'
+import { FormField, Props } from '../types/components/SelectFile'
+import isErrors from '../utills/isErrors'
 
-const SelectFile = ({ fileInfo, setFile, errors }: any) => {
+const SelectFile = ({ fileInfo, setFile, errors }: Props) => {
   const { setFieldValue } = useFormikContext()
 
-  const onFileInputChange = (event: any) => {
-    if (event.target.files.length === 0) {
-      return
-    }
+  /**
+   *
+   * @param {React.ChangeEvent<HTMLInputElement>} event
+   * @returns {void}
+   */
+  const onFileInputChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    const files = event.currentTarget.files ?? []
+    if (files.length === 0) return
 
-    setFile((fileInfo: any) => ({ ...fileInfo, object: event.currentTarget.files[0] }))
+    const file = files[0]
+    setFile({
+      ...fileInfo,
+      file: file,
+    })
 
     const reader = new FileReader()
-
-    reader.onload = (e: any) => {
-      //base64形式の画像データをfileInfoに格納
-      setFile((fileInfo: any) => ({ ...fileInfo, base64data: e.target.result }))
+    reader.onload = (e: ProgressEvent<FileReader>) => {
+      const result = e.target?.result as string | null
+      setFile({
+        ...fileInfo,
+        base64: result,
+      })
     }
 
-    reader.readAsDataURL(event.currentTarget.files[0])
+    reader.readAsDataURL(file)
 
-    setFieldValue('image', event.currentTarget.files !== null ? event.currentTarget.files[0] : null)
-  }
-
-  /**
-   * エラーがあるかどうかチェック
-   * @param {string[]} errorsKey
-   * @returns {boolean}
-   */
-  const isErrors = (errorsKey: string[]): boolean => {
-    return errorsKey ? errorsKey.length !== 0 : false
+    setFieldValue('image', file)
   }
 
   return (
     <>
       <Field name='image'>
-        {({ field }: any) => (
+        {({ field }: FormField) => (
           <FormControl isInvalid={isErrors(errors.image)}>
             <FormLabel>プロフィール画像</FormLabel>
             <Box
@@ -49,7 +52,7 @@ const SelectFile = ({ fileInfo, setFile, errors }: any) => {
               <Image
                 borderRadius='full'
                 boxSize='150px'
-                src={fileInfo.base64data ? fileInfo.base64data : '/no_image.jpeg'}
+                src={fileInfo.base64 ? fileInfo.base64 : '/no_image.jpeg'}
                 m='auto'
                 mt='20px'
               />
@@ -57,6 +60,7 @@ const SelectFile = ({ fileInfo, setFile, errors }: any) => {
                 アップロード
               </Box>
               <Input
+                {...field}
                 type='file'
                 height='100%'
                 width='100%'
@@ -65,7 +69,6 @@ const SelectFile = ({ fileInfo, setFile, errors }: any) => {
                 left='0'
                 opacity='0'
                 aria-hidden='true'
-                {...field}
                 accept='image/*'
                 value={undefined}
                 onChange={onFileInputChange}

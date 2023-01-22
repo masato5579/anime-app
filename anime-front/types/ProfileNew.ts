@@ -1,5 +1,4 @@
-export interface Errors {
-  name: string[]
-  age: string[]
-  sex: string[]
+export interface Files {
+  object: object
+  base64data: string
 }
