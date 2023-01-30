@@ -18,7 +18,7 @@ export interface UserResponse {
   image: string
   age: number
   sex: number
-  email_verified_at: any
-  created_at: any
-  updated_at: any
+  email_verified_at: Date
+  created_at: Date
+  updated_at: Date
 }

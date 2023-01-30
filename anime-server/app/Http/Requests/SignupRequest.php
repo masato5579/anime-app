@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
 
 class SignupRequest extends FormRequest
@@ -24,16 +25,23 @@ class SignupRequest extends FormRequest
      */
     public function rules()
     {
-        $check = $this->input('check');
+        $check = $this->input('emailAndPassCheck');
 
-        $emailAndPasswordCheck = $check
-            ? [
-                'email' => 'required|email:strict,dns|max:255',
-                'password' => Password::min(8)->required(), // 8文字以上で必須項目
-            ] : [];
+        $commonInput = [
+            'email' => ['required','email:strict,dns','max:255',Rule::unique('m_user')],
+            'password' => Password::min(8)->required(),
+        ];
 
-        return array_merge([
+        $profileInput = [
+            'name'  => 'required|string|max:255',
+            'age'   => 'nullable|integer',
+            'sex'   => 'nullable|integer',
+            'image.name' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image.size' => 'nullable|numeric|max:2048',
+        ];
 
-        ], $emailAndPasswordCheck);
+        return $check
+            ? $commonInput
+            : array_merge($commonInput, $profileInput);
     }
 }
