@@ -1,5 +1,6 @@
 import { Box, FormControl, FormLabel, Image, Input } from '@chakra-ui/react'
 import { Field, useFormikContext } from 'formik'
+
 import { FormField, Props } from '../types/components/SelectFile'
 import isErrors from '../utills/isErrors'
 
@@ -55,6 +56,7 @@ const SelectFile = ({ fileInfo, setFile, errors }: Props) => {
                 src={fileInfo.base64 ? fileInfo.base64 : '/no_image.jpeg'}
                 m='auto'
                 mt='20px'
+                alt='profile_image'
               />
               <Box textAlign='center' mt='30px'>
                 アップロード

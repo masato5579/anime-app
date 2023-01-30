@@ -2,6 +2,7 @@ import { Box, Button, Container, Heading, Link, Text } from '@chakra-ui/react'
 import { Form, Formik } from 'formik'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
+
 import FormField from '../components/FormField'
 import { Errors } from '../types/Errors'
 import { postData } from '../utills/postData'
@@ -20,7 +21,10 @@ const SignUp = () => {
    * @param {Function} setSubmitting
    * @return {void}
    */
-  const checkEmailAndPass = (formData: object, setSubmitting: Function): void => {
+  const checkEmailAndPass = (
+    formData: object,
+    setSubmitting: (isSubmitting: boolean) => void,
+  ): void => {
     const newFormData = {
       ...formData,
       emailAndPassCheck: true,
@@ -31,7 +35,7 @@ const SignUp = () => {
 
   return (
     <>
-      <Container maxW='600px' pt={{ base: '50px', md: '100px' }}>
+      <Container maxW='600px' py={{ base: '50px', md: '100px' }}>
         <Heading as='h1' fontSize='3xl' color='brand.500' m='auto' textAlign='center'>
           アニメなに見た？
         </Heading>
