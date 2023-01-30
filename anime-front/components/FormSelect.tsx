@@ -4,12 +4,12 @@ import { Field, FieldProps } from 'formik'
 import { Option, Props } from '../types/components/FormSelect'
 import isErrors from '../utills/isErrors'
 
-const FormSelect = ({ name, errorsArray, placeHolder, options }: Props) => {
+const FormSelect = ({ name, errorsArray, label, placeHolder, options }: Props) => {
   return (
     <Field name={name}>
       {({ field }: FieldProps<string>) => (
         <FormControl isInvalid={isErrors(errorsArray)}>
-          <FormLabel>年齢</FormLabel>
+          <FormLabel>{label}</FormLabel>
           <Select
             placeholder={placeHolder}
             bg='white'
