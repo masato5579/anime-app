@@ -15,7 +15,7 @@ const FormSelect = ({ name, errorsArray, placeHolder, options }: Props) => {
             bg='white'
             borderColor='base.500'
             h={{ base: '35px', md: '55px' }}
-            onChange={field.onChange}
+            {...field}
           >
             {options.map(
               (option: Option, index: number): JSX.Element => (

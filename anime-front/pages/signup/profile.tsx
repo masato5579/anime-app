@@ -70,6 +70,7 @@ const Profile = () => {
                     <FormSelect
                       name='age'
                       errorsArray={errors.age}
+                      label='年齢'
                       placeHolder='年齢'
                       options={ageOptions()}
                     />
@@ -78,6 +79,7 @@ const Profile = () => {
                     <FormSelect
                       name='sex'
                       errorsArray={errors.sex}
+                      label='性別'
                       placeHolder='性別'
                       options={sexOptions}
                     />
