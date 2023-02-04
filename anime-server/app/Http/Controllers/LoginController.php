@@ -7,6 +7,10 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
+    /**
+     * post
+     * @param LoginRequest $request
+     */
     public function login(LoginRequest $request)
     {
         $input = $request->only([
@@ -19,8 +23,6 @@ class LoginController extends Controller
             return response()->json(Auth::user());
         }
 
-        return response()->json([
-            'failed' => [true],
-        ], 401);
+        return response()->json([], 401);
     }
 }

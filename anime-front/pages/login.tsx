@@ -1,4 +1,4 @@
-import { Box, Button, Container, Heading } from '@chakra-ui/react'
+import { Box, Button, Container, Heading, Link, Text } from '@chakra-ui/react'
 import { Form, Formik } from 'formik'
 import { useState } from 'react'
 
@@ -8,7 +8,6 @@ import { Errors } from '../types/Errors'
 
 const Login = () => {
   const { handleLogin } = useHandleLogin()
-
   const [errors, setErrors] = useState({
     email: [],
     password: [],
@@ -66,6 +65,12 @@ const Login = () => {
                 </Form>
               )}
             </Formik>
+            <Text textAlign='center' mt={{ base: '10px', md: '20px' }} fontSize='sm'>
+              アカウントを登録がお済みでない方は、
+              <Link textDecoration='underline' href='/signup'>
+                こちら
+              </Link>
+            </Text>
           </Box>
         </Box>
       </Container>

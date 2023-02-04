@@ -83,7 +83,9 @@ const SignUp = () => {
                   </Button>
                   <Text textAlign='center' mt={{ base: '10px', md: '20px' }} fontSize='sm'>
                     すでにアカウントをお持ちの方は
-                    <Link textDecoration='underline'>こちら</Link>
+                    <Link textDecoration='underline' href='/login'>
+                      こちら
+                    </Link>
                   </Text>
                 </Form>
               )}

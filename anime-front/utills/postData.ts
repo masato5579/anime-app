@@ -3,7 +3,7 @@ import { Dispatch, SetStateAction } from 'react'
 
 import { Errors } from '../types/Errors'
 
-import { apiClient, apiClientForfile } from './axios'
+import { apiServer, apiServerForfile } from './axios'
 
 /**
  *
@@ -25,7 +25,7 @@ export async function postData(
   setErrors: Dispatch<SetStateAction<Errors>>,
   nextPage: string = nextPassName,
 ) {
-  const api = isFileSendOn ? apiClientForfile : apiClient
+  const api = isFileSendOn ? apiServerForfile : apiServer
 
   return await api
     .post(apiPass, formData)

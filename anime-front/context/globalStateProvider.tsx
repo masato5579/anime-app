@@ -1,13 +1,8 @@
-import { createContext, Dispatch, SetStateAction, useState } from 'react'
+import { createContext, useState } from 'react'
 
-import { GlobalState } from '../types/globalState'
+import { GlobalState, GlobalContext as GlobalContextType } from '../types/globalState'
 
-export const GlobalContext = createContext(
-  {} as {
-    state: GlobalState
-    setState: Dispatch<SetStateAction<GlobalState>>
-  },
-)
+export const GlobalContext = createContext({} as GlobalContextType)
 
 export const GlobalStateProvider = ({ children }: { children: React.ReactNode }): JSX.Element => {
   // グローバルステート
@@ -20,7 +15,6 @@ export const GlobalStateProvider = ({ children }: { children: React.ReactNode })
     },
   })
 
-  // 状態と関数をオブジェクトにラップして、プロバイダーに引き渡す
   const global = {
     state,
     setState,

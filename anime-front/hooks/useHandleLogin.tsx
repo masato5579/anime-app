@@ -6,7 +6,7 @@ import { Dispatch, SetStateAction, useContext } from 'react'
 import { GlobalContext } from '../context/globalStateProvider'
 import { Errors } from '../types/Errors'
 import { User } from '../types/globalState'
-import { apiClient, Client } from '../utills/axios'
+import { apiServer, Server } from '../utills/axios'
 
 export const useHandleLogin = () => {
   const global = useContext(GlobalContext)
@@ -18,12 +18,12 @@ export const useHandleLogin = () => {
     password: string,
     setErrors: Dispatch<SetStateAction<Errors>>,
   ) => void = (email, password, setErrors) => {
-    Client.get('/sanctum/csrf-cookie').then(() => {
+    Server.get('/sanctum/csrf-cookie').then(() => {
       const formData = {
         email: email,
         password: password,
       }
-      apiClient
+      apiServer
         .post('login', formData)
         .then((res: AxiosResponse<User>) => {
           const user = res.data
