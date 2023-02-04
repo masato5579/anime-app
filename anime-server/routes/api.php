@@ -1,9 +1,10 @@
 <?php
 
+use App\Http\Controllers\LoginController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SignUpController;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,5 +25,6 @@ Route::get('test', static function () {
     return User::first();
 });
 
+Route::post("login", [LoginController::class, "login"]);
 Route::post('signup', [SignUpController::class, 'signup'])->name('signup');
 Route::post('signup-check', [SignUpController::class, 'signupCheck'])->name('signup-check');
