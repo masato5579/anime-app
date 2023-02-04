@@ -1,14 +1,14 @@
 import { Box, Button, Container, Heading, Link, Text } from '@chakra-ui/react'
 import { Form, Formik } from 'formik'
-import { useRouter } from 'next/router'
 import { useState } from 'react'
 
 import FormField from '../components/FormField'
+import { useHandleSignUpCheck } from '../hooks/useHandleSignUpCheck'
 import { Errors } from '../types/Errors'
-import { postData } from '../utills/postData'
+import { FormData } from '../types/hooks/useHandleSignUpCheck'
 
 const SignUp = () => {
-  const router = useRouter()
+  const { handleSignUpCheck } = useHandleSignUpCheck()
 
   const [errors, setErrors] = useState({
     email: [],
@@ -22,14 +22,14 @@ const SignUp = () => {
    * @return {void}
    */
   const checkEmailAndPass = (
-    formData: object,
+    formData: FormData,
     setSubmitting: (isSubmitting: boolean) => void,
   ): void => {
     const newFormData = {
       ...formData,
       emailAndPassCheck: true,
     }
-    postData(false, 'signup-check', newFormData, router, '/signup/profile', setErrors)
+    handleSignUpCheck(newFormData, setErrors)
     setSubmitting(false)
   }
 

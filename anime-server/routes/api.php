@@ -25,6 +25,6 @@ Route::get('test', static function () {
     return User::first();
 });
 
-Route::post("login", [LoginController::class, "login"]);
+Route::post("login", [LoginController::class, "login"])->name('login');
 Route::post('signup', [SignUpController::class, 'signup'])->name('signup');
 Route::post('signup-check', [SignUpController::class, 'signupCheck'])->name('signup-check');
