@@ -1,6 +1,10 @@
 import Head from 'next/head'
 
+import { useHandleLogout } from '../hooks/useLogout'
+
 const Home = () => {
+  const handleLogout = useHandleLogout()
+
   return (
     <>
       <Head>
@@ -9,6 +13,9 @@ const Home = () => {
         <meta name='viewport' content='width=device-width, initial-scale=1' />
       </Head>
       <main>Dashboard</main>
+      <div>
+        <div onClick={handleLogout}>ログアウト</div>
+      </div>
     </>
   )
 }
