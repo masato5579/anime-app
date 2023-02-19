@@ -11,6 +11,7 @@ export const Server = axios.create({
 export const apiServer = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_ENDOPOINT,
   responseType: 'json',
+  withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
   },

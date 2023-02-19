@@ -1,5 +1,6 @@
 import { ChakraProvider } from '@chakra-ui/react'
 
+import AuthProvider from '../context/AuthProvider'
 import { GlobalStateProvider } from '../context/globalStateProvider'
 import theme from '../theme'
 
@@ -11,7 +12,9 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <GlobalStateProvider>
       <ChakraProvider theme={theme}>
-        <Component {...pageProps} />
+        <AuthProvider>
+          <Component {...pageProps} />
+        </AuthProvider>
       </ChakraProvider>
     </GlobalStateProvider>
   )
