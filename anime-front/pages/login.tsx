@@ -3,35 +3,15 @@ import { Form, Formik } from 'formik'
 import { useState } from 'react'
 
 import FormField from '../components/FormField'
-import { useHandleSignUpCheck } from '../hooks/useHandleSignUpCheck'
+import { useHandleLogin } from '../hooks/useHandleLogin'
 import { Errors } from '../types/Errors'
-import { FormData } from '../types/hooks/useHandleSignUpCheck'
 
-const SignUp = () => {
-  const { handleSignUpCheck } = useHandleSignUpCheck()
-
+const Login = () => {
+  const { handleLogin } = useHandleLogin()
   const [errors, setErrors] = useState({
     email: [],
     password: [],
   } as Errors)
-
-  /**
-   * EmailとPasswordがバリデーションに引っかからないかチェックするAPIを投げる
-   * @param {object} formData
-   * @param {Function} setSubmitting
-   * @return {void}
-   */
-  const checkEmailAndPass = (
-    formData: FormData,
-    setSubmitting: (isSubmitting: boolean) => void,
-  ): void => {
-    const newFormData = {
-      ...formData,
-      emailAndPassCheck: true,
-    }
-    handleSignUpCheck(newFormData, setErrors)
-    setSubmitting(false)
-  }
 
   return (
     <>
@@ -41,13 +21,14 @@ const SignUp = () => {
         </Heading>
         <Box maxW='420px' m='auto' mt={{ base: '25px', md: '40px' }}>
           <Heading as='h2' fontSize='2xl' textAlign='center'>
-            Sign Up
+            Login
           </Heading>
           <Box mt={{ base: '25px', md: '50px' }}>
             <Formik
               initialValues={{ email: '', password: '' }}
               onSubmit={(formData, { setSubmitting }) => {
-                checkEmailAndPass(formData, setSubmitting)
+                handleLogin(formData.email, formData.password, setErrors)
+                setSubmitting(false)
               }}
             >
               {(props) => (
@@ -55,7 +36,7 @@ const SignUp = () => {
                   <Box>
                     <FormField
                       name='email'
-                      errorsArray={errors.email}
+                      errorsArray={errors?.email}
                       label='メールアドレス'
                       placeHolder='メールアドレス'
                       type='email'
@@ -64,7 +45,7 @@ const SignUp = () => {
                   <Box mt={{ base: '12px', md: '25px' }}>
                     <FormField
                       name='password'
-                      errorsArray={errors.password}
+                      errorsArray={errors?.password}
                       label='パスワード'
                       placeHolder='パスワード'
                       type='password'
@@ -79,17 +60,17 @@ const SignUp = () => {
                     isLoading={props.isSubmitting}
                     type='submit'
                   >
-                    登録する
+                    ログインする
                   </Button>
-                  <Text textAlign='center' mt={{ base: '10px', md: '20px' }} fontSize='sm'>
-                    すでにアカウントをお持ちの方は
-                    <Link textDecoration='underline' href='/login'>
-                      こちら
-                    </Link>
-                  </Text>
                 </Form>
               )}
             </Formik>
+            <Text textAlign='center' mt={{ base: '10px', md: '20px' }} fontSize='sm'>
+              アカウントを登録がお済みでない方は、
+              <Link textDecoration='underline' href='/signup'>
+                こちら
+              </Link>
+            </Text>
           </Box>
         </Box>
       </Container>
@@ -97,4 +78,4 @@ const SignUp = () => {
   )
 }
 
-export default SignUp
+export default Login

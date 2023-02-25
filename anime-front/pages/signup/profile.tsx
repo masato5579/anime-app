@@ -6,13 +6,14 @@ import { useEffect, useState } from 'react'
 import FormField from '../../components/FormField'
 import FormSelect from '../../components/FormSelect'
 import SelectFile from '../../components/SelectFile'
+import { useHandleSignUp } from '../../hooks/useHandleSignUp'
 import { ageOptions, sexOptions } from '../../static/options'
 import { fileInfo } from '../../types/components/SelectFile'
 import { Errors } from '../../types/Errors'
-import { postData } from '../../utills/postData'
 
 const Profile = () => {
   const router = useRouter()
+  const { handleSignUp } = useHandleSignUp()
 
   useEffect(() => {
     if (!router.query.confirmed) {
@@ -40,14 +41,14 @@ const Profile = () => {
         </Heading>
         <Box maxW='420px' m='auto' mt={{ base: '25px', md: '50px' }}>
           <Formik
-            initialValues={{ name: '', age: '', sex: '', image: '' }}
+            initialValues={{ name: '', age: null, sex: null, image: null }}
             onSubmit={(formData, { setSubmitting }) => {
               const newFormData = {
                 ...formData,
-                email: router.query.email,
-                password: router.query.password,
+                email: router.query.email as string,
+                password: router.query.password as string,
               }
-              postData(true, 'signup', newFormData, router, '/', setErrors)
+              handleSignUp(newFormData, setErrors)
               setSubmitting(false)
             }}
           >

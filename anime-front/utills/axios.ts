@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-export const apiClient = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_ENDOPOINT,
+export const Server = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_ENDOPOINT,
   responseType: 'json',
   headers: {
     'Content-Type': 'application/json',
@@ -9,14 +9,15 @@ export const apiClient = axios.create({
 })
 
 export const apiServer = axios.create({
-  baseURL: process.env.API_ENDOPOINT,
+  baseURL: process.env.NEXT_PUBLIC_API_ENDOPOINT,
   responseType: 'json',
+  withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
   },
 })
 
-export const apiClientForfile = axios.create({
+export const apiServerForfile = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_ENDOPOINT,
   headers: {
     'Content-Type': 'multipart/form-data',

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SignupRequest;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class SignUpController extends Controller
@@ -14,7 +15,9 @@ class SignUpController extends Controller
      */
     public function signupCheck(SignupRequest $request)
     {
-        return response()->json(['confirmed' => true]);
+        return response()->json([
+            'confirmed' => true,
+        ], 200);
     }
 
     /**
@@ -34,12 +37,13 @@ class SignUpController extends Controller
             ? $request->file('image')->store('profile', 'public')
             : null;
 
-        User::create([
+        $user = User::create([
             ...$input,
             'password' => Hash::make($request->password),
             'image' => $path,
         ]);
 
-        return response()->json(['confirmed' => true]);
+        Auth::login($user);
+        return response()->json($user, 200);
     }
 }
