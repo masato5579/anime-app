@@ -9,7 +9,6 @@ import {
   Link,
   Popover,
   PopoverTrigger,
-  useColorModeValue,
   useBreakpointValue,
   useDisclosure,
   Button,
@@ -29,8 +28,8 @@ const Navbar = ({
   return (
     <Box>
       <Flex
-        bg={useColorModeValue('brand.500', 'gray.800')}
-        color={useColorModeValue('white', 'white')}
+        bg={'brand.500'}
+        color={'white'}
         minH={'60px'}
         py={{ base: 2 }}
         px={{ base: 4 }}
@@ -54,7 +53,7 @@ const Navbar = ({
             href={'/'}
             textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
             fontSize={'sm'}
-            color={useColorModeValue('white', 'white')}
+            color={'white'}
           >
             アニメなにみた?
           </Text>
@@ -69,7 +68,7 @@ const Navbar = ({
             as={'a'}
             fontSize={'sm'}
             fontWeight={400}
-            color='base.500'
+            color={'base.500'}
             variant={'link'}
             onClick={handleLogout}
           >
@@ -86,9 +85,6 @@ const Navbar = ({
 }
 
 const DesktopNav = () => {
-  const linkColor = useColorModeValue('white', 'gray.200')
-  const linkHoverColor = useColorModeValue('gray.800', 'white')
-
   return (
     <Stack direction={'row'} spacing={4}>
       {navItems.map((navItem) => (
@@ -100,10 +96,10 @@ const DesktopNav = () => {
                 href={navItem.href ?? '#'}
                 fontSize={'sm'}
                 fontWeight={500}
-                color={linkColor}
+                color={'white'}
                 _hover={{
                   textDecoration: 'none',
-                  color: linkHoverColor,
+                  color: 'brand.500',
                 }}
               >
                 {navItem.label}
@@ -118,7 +114,7 @@ const DesktopNav = () => {
 
 const MobileNav = () => {
   return (
-    <Stack bg={useColorModeValue('white', 'gray.800')} p={4} display={{ md: 'none' }}>
+    <Stack bg={'white'} p={4} display={{ md: 'none' }}>
       {navItems.map((navItem) => (
         <MobileNavItem key={navItem.label} {...navItem} />
       ))}
@@ -141,7 +137,7 @@ const MobileNavItem = ({ label, href }: NavItem) => {
           textDecoration: 'none',
         }}
       >
-        <Text fontSize='sm' color={useColorModeValue('base.500', 'base.500')}>
+        <Text fontSize='sm' color={'base.500'}>
           {label}
         </Text>
       </Flex>
