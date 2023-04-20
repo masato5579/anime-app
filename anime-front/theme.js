@@ -24,11 +24,14 @@ const theme = extendTheme({
     base: {
       500: '#111111',
     },
+    yellow: {
+      500: '#FFF500',
+    },
   },
   styles: {
     global: {
       body: {
-        backgroundColor: '#F8F8F8',
+        background: '#F8F8F8',
         color: '#111111',
       },
       html: {
