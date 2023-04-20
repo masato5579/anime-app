@@ -70,6 +70,7 @@ const Navbar = ({
             fontWeight={400}
             color={'base.500'}
             variant={'link'}
+            cursor={'pointer'}
             onClick={handleLogout}
           >
             ログアウト
@@ -99,7 +100,7 @@ const DesktopNav = () => {
                 color={'white'}
                 _hover={{
                   textDecoration: 'none',
-                  color: 'brand.500',
+                  color: 'base.500',
                 }}
               >
                 {navItem.label}
