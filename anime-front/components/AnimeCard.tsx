@@ -19,11 +19,11 @@ const DesktopCard = ({ animeData, cardWidth }: Props) => {
     <Card w={cardWidth}>
       <CardBody pb={'0'}>
         <Image src={animeData.image} alt='anime_image' width={500} height={500} />
-        <Stack mt='6' spacing='3'>
+        <Stack mt={6} spacing={3}>
           <Heading fontSize={'xl'}>{animeData.name}</Heading>
           <Text fontSize={'sm'}>
             公式サイト :&nbsp;
-            <Link href={animeData.public_url} color={'brand.500'}>
+            <Link href={animeData.public_url} color={'brand'}>
               {animeData.public_url}
             </Link>
           </Text>
@@ -34,11 +34,11 @@ const DesktopCard = ({ animeData, cardWidth }: Props) => {
       </CardBody>
       <CardFooter m={'0 0 0 auto'} p={'0 10px 10px 10px'}>
         <Box textAlign={'center'} cursor={'pointer'} mr={'10px'}>
-          <ViewIcon color={'brand.500'} />
+          <ViewIcon color={'brand'} />
           <Text fontSize={'12px'}>これ見た</Text>
         </Box>
         <Box textAlign={'center'} cursor={'pointer'}>
-          <StarIcon color={'yellow.500'} />
+          <StarIcon color={'favo'} />
           <Text fontSize={'12px'}>お気に入り</Text>
         </Box>
       </CardFooter>

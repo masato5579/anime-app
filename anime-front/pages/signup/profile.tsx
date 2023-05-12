@@ -36,7 +36,7 @@ const Profile = () => {
   return (
     <>
       <Container maxW='600px' py={{ base: '50px', md: '100px' }}>
-        <Heading as='h2' fontSize='2xl' color='brand.500' m='auto' textAlign='center'>
+        <Heading as='h2' fontSize='2xl' color='brand' m='auto' textAlign='center'>
           プロフィール設定
         </Heading>
         <Box maxW='420px' m='auto' mt={{ base: '25px', md: '50px' }}>

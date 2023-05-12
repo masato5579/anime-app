@@ -1,6 +1,6 @@
 import { AxiosError, AxiosResponse } from 'axios'
 import { useRouter } from 'next/router'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 
 import { GlobalContext } from '../context/globalStateProvider'
 import { noGuardedRoutes } from '../data/noGuardedRoutes'
@@ -10,6 +10,7 @@ import { apiServer } from '../utills/axios'
 export const useListenAuthState = () => {
   const global = useContext(GlobalContext)
   const router = useRouter()
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
 
   const listenAuthState = (): void => {
     apiServer
@@ -31,6 +32,7 @@ export const useListenAuthState = () => {
             isSignedIn: true,
           },
         })
+        setIsAuthenticated(true)
       })
       .catch((e: AxiosError) => {
         global.setState({
@@ -53,6 +55,7 @@ export const useListenAuthState = () => {
   }
 
   return {
+    isAuthenticated,
     listenAuthState,
   }
 }

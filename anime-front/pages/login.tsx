@@ -16,7 +16,7 @@ const Login = () => {
   return (
     <>
       <Container maxW='600px' py={{ base: '50px', md: '100px' }}>
-        <Heading as='h1' fontSize='3xl' color='brand.500' m='auto' textAlign='center'>
+        <Heading as='h1' fontSize='3xl' color='brand' m='auto' textAlign='center'>
           アニメなに見た？
         </Heading>
         <Box maxW='420px' m='auto' mt={{ base: '25px', md: '40px' }}>
@@ -53,21 +53,22 @@ const Login = () => {
                   </Box>
                   <Button
                     mt={{ base: '25px', md: '50px' }}
-                    w='100%'
-                    fontSize='2md'
+                    w={'100%'}
+                    fontSize={'2md'}
                     h={{ base: '35px', md: '55px' }}
-                    colorScheme='brand'
+                    bg={'brand'}
+                    color={'#ffffff'}
                     isLoading={props.isSubmitting}
-                    type='submit'
+                    type={'submit'}
                   >
                     ログインする
                   </Button>
                 </Form>
               )}
             </Formik>
-            <Text textAlign='center' mt={{ base: '10px', md: '20px' }} fontSize='sm'>
+            <Text textAlign={'center'} mt={{ base: '10px', md: '20px' }} fontSize={'sm'}>
               アカウントを登録がお済みでない方は、
-              <Link textDecoration='underline' href='/signup'>
+              <Link textDecoration={'underline'} href='/signup'>
                 こちら
               </Link>
             </Text>
