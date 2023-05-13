@@ -3,11 +3,11 @@ import { AxiosResponse } from 'axios'
 import { useRouter } from 'next/router'
 import { Dispatch, SetStateAction, useContext } from 'react'
 
-import { GlobalContext } from '../context/globalStateProvider'
+import { GlobalContext } from '../context/GlobalStateProvider'
 import { Errors } from '../types/Errors'
 import { User } from '../types/globalState'
 import { FormData } from '../types/hooks/useHandleSignUp'
-import { apiServerForfile, Server } from '../utills/axios'
+import { Server, ServerForFile } from '../utills/axios'
 
 export const useHandleSignUp = () => {
   const global = useContext(GlobalContext)
@@ -19,8 +19,7 @@ export const useHandleSignUp = () => {
     setErrors,
   ) => {
     Server.get('/sanctum/csrf-cookie').then(() => {
-      apiServerForfile
-        .post('signup', formData)
+      ServerForFile.post('signup', formData)
         .then((res: AxiosResponse<User>) => {
           const user = res.data
           global.setState({
@@ -31,6 +30,7 @@ export const useHandleSignUp = () => {
               email: user.email,
               isSignedIn: true,
             },
+            isAuthenticated: true,
           })
           router.push('/')
         })
@@ -42,7 +42,6 @@ export const useHandleSignUp = () => {
             status: 'error',
             isClosable: true,
           })
-          console.error(e)
         })
     })
   }

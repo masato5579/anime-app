@@ -1,8 +1,8 @@
-import { AxiosError, AxiosResponse } from 'axios'
+import { AxiosResponse } from 'axios'
 import { useRouter } from 'next/router'
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 
-import { GlobalContext } from '../context/globalStateProvider'
+import { GlobalContext } from '../context/GlobalStateProvider'
 import { noGuardedRoutes } from '../data/noGuardedRoutes'
 import { User } from '../types/User'
 import { apiServer } from '../utills/axios'
@@ -10,7 +10,6 @@ import { apiServer } from '../utills/axios'
 export const useListenAuthState = () => {
   const global = useContext(GlobalContext)
   const router = useRouter()
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
 
   const listenAuthState = (): void => {
     apiServer
@@ -31,10 +30,10 @@ export const useListenAuthState = () => {
             email: user.email,
             isSignedIn: true,
           },
+          isAuthenticated: true,
         })
-        setIsAuthenticated(true)
       })
-      .catch((e: AxiosError) => {
+      .catch(() => {
         global.setState({
           ...global.state,
           user: {
@@ -43,6 +42,7 @@ export const useListenAuthState = () => {
             email: '',
             isSignedIn: false,
           },
+          isAuthenticated: false,
         })
 
         if (noGuardedRoutes.includes(router.pathname)) {
@@ -50,12 +50,10 @@ export const useListenAuthState = () => {
         } else {
           router.push('/login')
         }
-        console.error(e)
       })
   }
 
   return {
-    isAuthenticated,
     listenAuthState,
   }
 }

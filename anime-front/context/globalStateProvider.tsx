@@ -13,6 +13,7 @@ export const GlobalStateProvider = ({ children }: { children: React.ReactNode })
       email: null,
       isSignedIn: false,
     },
+    isAuthenticated: false,
   })
 
   const global = {

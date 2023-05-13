@@ -1,9 +1,6 @@
 <?php
 
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\LogoutController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\SignUpController;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -25,8 +22,3 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('test', static function () {
     return User::first();
 });
-
-Route::post("login", [LoginController::class, "login"])->name('login');
-Route::post('signup', [SignUpController::class, 'signup'])->name('signup');
-Route::post('signup-check', [SignUpController::class, 'signupCheck'])->name('signup-check');
-Route::post("logout", [LogoutController::class, "logout"]);

@@ -41,7 +41,7 @@ const Profile = () => {
         </Heading>
         <Box maxW='420px' m='auto' mt={{ base: '25px', md: '50px' }}>
           <Formik
-            initialValues={{ name: '', age: null, sex: null, image: null }}
+            initialValues={{ name: '', age: '', sex: '', image: '' }}
             onSubmit={(formData, { setSubmitting }) => {
               const newFormData = {
                 ...formData,
@@ -91,7 +91,8 @@ const Profile = () => {
                   w='100%'
                   fontSize='2md'
                   h={{ base: '35px', md: '55px' }}
-                  colorScheme='brand'
+                  bg={'brand'}
+                  color={'#ffffff'}
                   isLoading={props.isSubmitting}
                   type='submit'
                 >

@@ -18,14 +18,10 @@ import {
 import Head from 'next/head'
 
 import AnimeCard from '../components/AnimeCard'
-import Navbar from '../components/Navbar'
 import { animeData } from '../data/sampleData'
-import { useHandleLogout } from '../hooks/useLogout'
 import { AnimeData } from '../types/components/AnimeCard'
 
 const Home = () => {
-  const handleLogout = useHandleLogout()
-
   return (
     <>
       <Head>
@@ -34,7 +30,6 @@ const Home = () => {
         <meta name='viewport' content='width=device-width, initial-scale=1' />
       </Head>
       <Box>
-        <Navbar handleLogout={handleLogout} />
         <Box width={'90%'} margin={'auto'}>
           <Text
             as={'h2'}

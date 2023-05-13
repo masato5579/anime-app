@@ -3,10 +3,10 @@ import { AxiosResponse } from 'axios'
 import { useRouter } from 'next/router'
 import { Dispatch, SetStateAction, useContext } from 'react'
 
-import { GlobalContext } from '../context/globalStateProvider'
+import { GlobalContext } from '../context/GlobalStateProvider'
 import { Errors } from '../types/Errors'
 import { User } from '../types/globalState'
-import { apiServer, Server } from '../utills/axios'
+import { Server } from '../utills/axios'
 
 export const useHandleLogin = () => {
   const global = useContext(GlobalContext)
@@ -23,8 +23,7 @@ export const useHandleLogin = () => {
         email: email,
         password: password,
       }
-      apiServer
-        .post('login', formData)
+      Server.post('login', formData)
         .then((res: AxiosResponse<User>) => {
           const user = res.data
           global.setState({
@@ -35,6 +34,7 @@ export const useHandleLogin = () => {
               email: user.email,
               isSignedIn: true,
             },
+            isAuthenticated: true,
           })
           router.push('/')
         })
@@ -46,7 +46,6 @@ export const useHandleLogin = () => {
             status: 'error',
             isClosable: true,
           })
-          console.error(e)
         })
     })
   }

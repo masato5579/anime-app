@@ -8,7 +8,7 @@ export type FormData = {
   email: string
   password: string
   name: string
-  age: number | null
-  sex: number | null
-  image: Files | null
+  age: number | string
+  sex: number | string
+  image: Files | string
 }
