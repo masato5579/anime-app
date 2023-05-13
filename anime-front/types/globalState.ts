@@ -9,6 +9,7 @@ export type User = {
 
 export type GlobalState = {
   user: User
+  isAuthenticated: boolean
 }
 
 export type GlobalContext = {

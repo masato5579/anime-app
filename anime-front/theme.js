@@ -15,20 +15,17 @@ const theme = extendTheme({
     '3xl': 'clamp(22px, 4.8vw, 52px)',
   },
   colors: {
-    brand: {
-      500: '#40BDBD',
-    },
+    brand: '#40BDBD',
+    base: '#111111',
+    favo: '#FFF500',
     bg: {
-      500: 'F8F8F8',
-    },
-    base: {
-      500: '#111111',
+      normal: 'F8F8F8',
     },
   },
   styles: {
     global: {
       body: {
-        backgroundColor: '#F8F8F8',
+        background: '#F8F8F8',
         color: '#111111',
       },
       html: {

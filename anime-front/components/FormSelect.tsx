@@ -12,8 +12,8 @@ const FormSelect = ({ name, errorsArray, label, placeHolder, options }: Props) =
           <FormLabel>{label}</FormLabel>
           <Select
             placeholder={placeHolder}
-            bg='white'
-            borderColor='base.500'
+            bg={'white'}
+            borderColor={'base'}
             h={{ base: '35px', md: '55px' }}
             {...field}
           >

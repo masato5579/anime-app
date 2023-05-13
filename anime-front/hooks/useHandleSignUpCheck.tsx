@@ -6,7 +6,7 @@ import { Dispatch, SetStateAction } from 'react'
 import { Errors } from '../types/Errors'
 import { Confirmed } from '../types/hooks/useHandleSignUp'
 import { FormData } from '../types/hooks/useHandleSignUpCheck'
-import { apiServer, Server } from '../utills/axios'
+import { Server } from '../utills/axios'
 
 export const useHandleSignUpCheck = () => {
   const router = useRouter()
@@ -17,8 +17,7 @@ export const useHandleSignUpCheck = () => {
     setErrors: Dispatch<SetStateAction<Errors>>,
   ) => void = (formData, setErrors) => {
     Server.get('/sanctum/csrf-cookie').then(() => {
-      apiServer
-        .post('signup-check', formData)
+      Server.post('signup-check', formData)
         .then((res: AxiosResponse<Confirmed>) => {
           if (res.status === 200) {
             const pathName = '/signup/profile'
@@ -42,7 +41,6 @@ export const useHandleSignUpCheck = () => {
             status: 'error',
             isClosable: true,
           })
-          console.error(e)
         })
     })
   }

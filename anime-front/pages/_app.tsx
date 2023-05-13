@@ -1,7 +1,8 @@
 import { ChakraProvider } from '@chakra-ui/react'
 
-import AuthProvider from '../context/AuthProvider'
-import { GlobalStateProvider } from '../context/globalStateProvider'
+import Layout from '../components/Layout'
+import { AuthProvider } from '../context/AuthProvider'
+import { GlobalStateProvider } from '../context/GlobalStateProvider'
 import theme from '../theme'
 
 import type { AppProps } from 'next/app'
@@ -13,7 +14,9 @@ export default function App({ Component, pageProps }: AppProps) {
     <GlobalStateProvider>
       <ChakraProvider theme={theme}>
         <AuthProvider>
-          <Component {...pageProps} />
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
         </AuthProvider>
       </ChakraProvider>
     </GlobalStateProvider>

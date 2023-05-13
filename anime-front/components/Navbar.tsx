@@ -28,7 +28,7 @@ const Navbar = ({
   return (
     <Box>
       <Flex
-        bg={'brand.500'}
+        bg={'brand'}
         color={'white'}
         minH={'60px'}
         py={{ base: 2 }}
@@ -68,8 +68,9 @@ const Navbar = ({
             as={'a'}
             fontSize={'sm'}
             fontWeight={400}
-            color={'base.500'}
+            color={'base'}
             variant={'link'}
+            cursor={'pointer'}
             onClick={handleLogout}
           >
             ログアウト
@@ -99,7 +100,7 @@ const DesktopNav = () => {
                 color={'white'}
                 _hover={{
                   textDecoration: 'none',
-                  color: 'brand.500',
+                  color: 'base',
                 }}
               >
                 {navItem.label}
@@ -137,7 +138,7 @@ const MobileNavItem = ({ label, href }: NavItem) => {
           textDecoration: 'none',
         }}
       >
-        <Text fontSize='sm' color={'base.500'}>
+        <Text fontSize={'sm'} color={'base'}>
           {label}
         </Text>
       </Flex>

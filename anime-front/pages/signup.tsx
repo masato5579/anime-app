@@ -36,7 +36,7 @@ const SignUp = () => {
   return (
     <>
       <Container maxW='600px' py={{ base: '50px', md: '100px' }}>
-        <Heading as='h1' fontSize='3xl' color='brand.500' m='auto' textAlign='center'>
+        <Heading as='h1' fontSize='3xl' color='brand' m='auto' textAlign='center'>
           アニメなに見た？
         </Heading>
         <Box maxW='420px' m='auto' mt={{ base: '25px', md: '40px' }}>
@@ -75,7 +75,8 @@ const SignUp = () => {
                     w='100%'
                     fontSize='2md'
                     h={{ base: '35px', md: '55px' }}
-                    colorScheme='brand'
+                    bg='brand'
+                    color={'#ffffff'}
                     isLoading={props.isSubmitting}
                     type='submit'
                   >

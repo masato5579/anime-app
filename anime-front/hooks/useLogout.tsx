@@ -2,8 +2,8 @@ import { useToast } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { useContext } from 'react'
 
-import { GlobalContext } from '../context/globalStateProvider'
-import { apiServer, Server } from '../utills/axios'
+import { GlobalContext } from '../context/GlobalStateProvider'
+import { Server } from '../utills/axios'
 
 export const useHandleLogout = () => {
   const global = useContext(GlobalContext)
@@ -12,8 +12,7 @@ export const useHandleLogout = () => {
 
   return () => {
     Server.get('/sanctum/csrf-cookie').then(() => {
-      apiServer
-        .post('logout')
+      Server.post('logout')
         .then(() => {
           global.setState({
             ...global.state,
@@ -23,16 +22,16 @@ export const useHandleLogout = () => {
               email: '',
               isSignedIn: false,
             },
+            isAuthenticated: false,
           })
           router.push('/login')
         })
-        .catch((e) => {
+        .catch(() => {
           toast({
             title: 'ログアウトに失敗しました。もう一度お試しください。',
             status: 'error',
             isClosable: true,
           })
-          console.error(e)
         })
     })
   }
